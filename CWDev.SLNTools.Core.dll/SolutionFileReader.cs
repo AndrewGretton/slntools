@@ -66,6 +66,7 @@ namespace CWDev.SLNTools.Core
                 m_solutionFile = new SolutionFile();
                 ReadHeader();
                 
+                // read past any VS 2013 data
                 var lastUsefulLine = Reset();
 
                 for (var i = 0; i < lastUsefulLine - 1; i++)
