@@ -33,6 +33,7 @@ namespace CWDev.SLNTools.Core
         public SolutionFileReader(string solutionFullPath)
             : this(new FileStream(solutionFullPath, FileMode.Open, FileAccess.Read))
         {
+
         }
 
         public SolutionFileReader(Stream reader)
@@ -64,10 +65,10 @@ namespace CWDev.SLNTools.Core
             {
                 m_solutionFile = new SolutionFile();
                 ReadHeader();
-                var usefulLineNumber = m_currentLineNumber;
-                m_reader.BaseStream.Position = 0;
-                m_reader.DiscardBufferedData();
-                for (var i = 0; i < usefulLineNumber - 1; i++)
+                
+                var lastUsefulLine = Reset();
+
+                for (var i = 0; i < lastUsefulLine - 1; i++)
                 {
                     m_reader.ReadLine();
                 }
@@ -93,6 +94,14 @@ namespace CWDev.SLNTools.Core
                 }
                 return m_solutionFile;
             }
+        }
+
+        private int Reset()
+        {
+            var usefulLineNumber = m_currentLineNumber;
+            m_reader.BaseStream.Position = 0;
+            m_reader.DiscardBufferedData();
+            return usefulLineNumber;
         }
 
         private string ReadLine()
