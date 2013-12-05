@@ -1,3 +1,10 @@
+SLNTools
+===
+
+Forked from http://slntools.codeplex.com/ which doesn't seem to be active
+
+Includes VS 2013 support
+
 Requirements to build only:
 - Framework 4.0.
 - Start "SLNTools.BuildReleaseVersion.cmd", the result will be put in the "bin\Release" subfolder.
